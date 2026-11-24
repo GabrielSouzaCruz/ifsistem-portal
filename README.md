@@ -8,7 +8,7 @@ Site estático (HTML, CSS e JavaScript), sem build e sem dependências.
 Edite o `modulos.json` e acrescente um item à lista:
 
 ```json
-{"id": "meu-modulo", "nome": "Nome do módulo", "descricao": "O que ele faz.", "icone": "📌", "url": "https://exemplo.onrender.com/login.html", "ativo": true}
+{"id": "meu-modulo", "nome": "Nome do módulo", "descricao": "O que ele faz.", "icone": "livro", "url": "https://exemplo.onrender.com/login.html", "ativo": true}
 ```
 
 | Campo | Uso |
@@ -16,11 +16,12 @@ Edite o `modulos.json` e acrescente um item à lista:
 | `id` | identificador único, sem espaços nem acentos |
 | `nome` | título do card |
 | `descricao` | texto curto abaixo do título |
-| `icone` | um emoji |
+| `icone` | um desenho pronto (`formatura`, `chave`, `conversa`, `livro`, `brilho`) ou um emoji |
 | `url` | endereço completo do módulo (abre na mesma aba) |
-| `ativo` | `true` mostra o botão **Acessar**; `false` mostra o card cinza com "Em breve" |
+| `ativo` | `true` mostra o botão **Acessar**; `false` mostra o card menor, em "Próximos módulos", com o selo "Em breve" |
 
 Para liberar um módulo que já está na lista, preencha a `url` e troque `ativo` para `true`.
+Para ter outro desenho, acrescente-o em `ICONES`, no `portal.js`.
 Os itens são separados por vírgula, sem vírgula depois do último. Faça o commit e o push na `main`.
 
 ## Rodar localmente
