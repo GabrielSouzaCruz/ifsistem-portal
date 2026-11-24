@@ -35,6 +35,9 @@
 
 body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: var(--fonte-texto);
     font-size: 16px;
     line-height: 1.5;
@@ -47,30 +50,67 @@ h1 { font-weight: 700; }
 h2 { font-weight: 600; }
 .muted { color: var(--texto-sec); }
 
-/* Topo e conteudo */
-.portal-topo { background: var(--verde-if); border-bottom: 5px solid var(--vermelho-if); padding: 1.25rem 1.5rem; }
-.portal-topo h1 { color: #fff; font-size: 1.5rem; }
-.portal-topo h1 span { font-weight: 600; opacity: .9; }
-.portal-conteudo { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
-.portal-intro { color: var(--texto-sec); margin: 0 0 1rem; }
-.portal-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+/* Mesma largura e mesmas margens no topo, no conteudo e no rodape: tudo alinha na mesma linha */
+.portal-largura { width: 100%; max-width: 1128px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
 
-/* Cards de modulo */
-.modulo { background: var(--superficie); border: 1px solid var(--borda); border-top: 4px solid var(--verde-if); border-radius: var(--raio); padding: 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
+/* Topo e conteudo */
+.portal-topo { background: var(--verde-if); border-bottom: 5px solid var(--vermelho-if); padding: 1.25rem 0; }
+.portal-topo h1 { color: #fff; font-size: clamp(1.15rem, 5vw, 1.5rem); }
+.portal-topo h1 span { font-weight: 600; opacity: .9; }
+.portal-conteudo { flex: 1; padding-top: 1.75rem; padding-bottom: 1.75rem; }
+.portal-intro { color: var(--texto-sec); font-size: 1.125rem; text-align: center; margin: 0 0 1.5rem; }
+
+/* Grade de 3 colunas (6 meias colunas, para centralizar a ultima linha quando ela nao enche) */
+.portal-grade { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.5rem; }
+
+/* Cards de modulo. Com subgrid, icone, titulo, descricao e botao alinham entre os cards da mesma linha */
+.modulo {
+    grid-column: span 2;
+    grid-row: span 4;
+    display: grid;
+    grid-template-rows: subgrid;
+    row-gap: .75rem;
+    padding: 1.5rem;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-top: 4px solid var(--verde-if);
+    border-radius: var(--raio);
+}
 .modulo h2 { font-size: 1.05rem; }
-.modulo p { margin: 0 0 .5rem; flex: 1; }
-.modulo-icone { font-size: 2rem; line-height: 1; }
+.modulo p { margin: 0; }
+.modulo-icone { display: grid; place-items: center; width: 56px; height: 56px; border-radius: var(--raio-peq); background: var(--fundo); font-size: 1.75rem; line-height: 1; }
 .modulo.inativo { filter: grayscale(1); opacity: .65; border-top-color: #9CA3AF; }
-.selo-breve { align-self: flex-start; background: var(--vermelho-if); color: #fff; font-size: 12px; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; }
+.modulo .btn, .modulo .selo-breve { margin-top: .5rem; }
+.selo-breve { align-self: center; justify-self: start; background: var(--vermelho-if); color: #fff; font-size: 12px; font-weight: 600; padding: .2rem .6rem; border-radius: 999px; }
 
 .btn {
     display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
     font-family: var(--fonte-titulo); font-weight: 600; font-size: 15px; text-align: center; text-decoration: none;
-    padding: .6rem 1.2rem; border-radius: var(--raio-peq); border: 1px solid transparent;
+    min-height: 44px; padding: .6rem 1.2rem; border-radius: var(--raio-peq); border: 1px solid transparent;
     background: var(--verde-acao); color: #fff;
 }
 .btn:hover, .btn:focus-visible { background: var(--verde-hover); }
 .btn:focus-visible { outline: 3px solid #86EFAC; outline-offset: 2px; }
 
-.rodape { padding: 1rem 2rem; font-size: 13px; color: var(--texto-sec); }
-@media (max-width: 860px) { .rodape { padding: 1rem; } }
+.rodape { padding: 1rem 0; border-top: 1px solid var(--borda); font-size: 13px; color: var(--texto-sec); text-align: center; }
+
+/* 3 colunas: centraliza a ultima linha com 1 ou 2 cards */
+@media (min-width: 901px) {
+    .modulo:last-child:nth-child(3n + 1) { grid-column: 3 / span 2; }
+    .modulo:nth-last-child(2):nth-child(3n + 1) { grid-column: 2 / span 2; }
+}
+
+/* 2 colunas: centraliza o card que sobra */
+@media (min-width: 601px) and (max-width: 900px) {
+    .portal-grade { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .modulo:last-child:nth-child(odd) { grid-column: 2 / span 2; }
+}
+
+/* 1 coluna */
+@media (max-width: 600px) {
+    .portal-largura { padding-left: 1rem; padding-right: 1rem; }
+    .portal-conteudo { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .portal-intro { font-size: 1rem; margin-bottom: 1.25rem; }
+    .portal-grade { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+    .modulo { grid-column: auto; padding: 1.25rem; }
+}
