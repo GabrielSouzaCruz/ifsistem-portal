@@ -6,7 +6,7 @@
  * navegador bloqueia o fetch. No site publicado vale sempre o modulos.json. */
 const MODULOS_LOCAL = [
   {"id": "aproveitamento", "nome": "Aproveitamento de Disciplinas", "descricao": "Solicite e acompanhe o aproveitamento de disciplinas.", "icone": "formatura", "url": "https://aproveitamento-ifsistem.onrender.com/login.html", "ativo": true},
-  {"id": "chaves", "nome": "Salas, Reservas e Chaves", "descricao": "Reserva de salas e controle de chaves.", "icone": "chave", "url": "https://chaves-ifsistem.vercel.app/", "ativo": true},
+  {"id": "chaves", "nome": "Salas, Reservas e Chaves", "descricao": "Reserva de salas e controle de chaves.", "icone": "chave", "url": "https://chaves-ifsistem.vercel.app", "ativo": true},
   {"id": "atendimento", "nome": "Atendimento ao Aluno", "descricao": "Canal de atendimento e protocolos.", "icone": "conversa", "url": "", "ativo": false},
   {"id": "biblioteca", "nome": "Biblioteca", "descricao": "Acervo, empréstimos e renovações.", "icone": "livro", "url": "", "ativo": false},
   {"id": "em-breve", "nome": "Em breve", "descricao": "Novos módulos chegando ao IFSISTEM.", "icone": "brilho", "url": "", "ativo": false}
